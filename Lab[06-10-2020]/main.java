@@ -7,7 +7,10 @@ class app extends JFrame implements ChangeListener
 	JPanel panel = new JPanel();
 	JSlider slider[] = new JSlider[4];
 
-	JLabel label = new JLabel();
+	JLabel label1 = new JLabel();
+	JLabel label2 = new JLabel();
+
+	int r,g,b;
 
 	app()
 	{
@@ -18,7 +21,7 @@ class app extends JFrame implements ChangeListener
 			if(i == 0)
 				slider[i] = new JSlider(0,300);
 			else
-				slider[i] = new JSlider(0, 250);
+				slider[i] = new JSlider(0, 255);
 			slider[i].setPaintTrack(true);
 			slider[i].setPaintTicks(true);
 			slider[i].setPaintLabels(true);
@@ -32,8 +35,17 @@ class app extends JFrame implements ChangeListener
 			panel.add(slider[i]);
 		}
 
-		panel.add(label);
-		label.setText("Diameter : " + slider[0].getValue());
+		r = slider[1].getValue();
+		g = slider[2].getValue();
+		b = slider[3].getValue();
+
+		String hex = String.format("#%02X%02X%02X", r, g, b);  
+
+
+		panel.add(label1);
+		panel.add(label2);
+		label1.setText("Diameter : " + slider[0].getValue());
+		label2.setText("RGB : " + hex);
 
 		
 		add(panel);
@@ -43,7 +55,13 @@ class app extends JFrame implements ChangeListener
 
 	public void stateChanged(ChangeEvent e)
 	{
-		label.setText("Diameter : " + slider[0].getValue());
+		r = slider[1].getValue();
+		g = slider[2].getValue();
+		b = slider[3].getValue();
+		String hex = String.format("#%02X%02X%02X", r, g, b);
+
+		label1.setText("Diameter : " + slider[0].getValue());
+		label2.setText("RGB : " + hex);
 	}
 }
 
